@@ -7,8 +7,8 @@ var mapController = {
 			$("#mapCanvas").height($(window).height() - $(".header").height());
 			$fh.map({
 				target : '#mapCanvas',
-				lat : -34.397,
-				lon : 150.644,
+				lat : 48.820,
+				lon : 2.235,
 				zoom : 11
 			}, function(map) {
 				that.map=map.map;

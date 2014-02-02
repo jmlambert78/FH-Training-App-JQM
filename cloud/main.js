@@ -1,4 +1,31 @@
 /*
+ Inserts an object (document) into a collection in MongoDB
+ @param params.insert an object to insert into your database
+ @param params.collection the collection to insert it into
+ */
+exports.mongodb = function(params, cb){
+  var MongoClient = require('mongodb').MongoClient,
+          format = require('util').format,
+          user = process.env.MONGODB_USER,
+          password = process.env.MONGODB_PASSWORD,
+          upString = (typeof user === 'string' && typeof password === 'string') ? user + ":" + password : "",
+          database = process.env.MONGODB_DATABASE,
+          host = process.env.MONGODB_HOST;
+
+  MongoClient.connect('mongodb://' + upString + '@' + host + '/' + database, function(err, db) {
+    if(err) return cb(err);
+
+    var collection = db.collection("test");
+    collection.findOne({}, function(err, docs) {
+      db.close();
+      return cb(null, docs);
+    });
+  });
+
+};
+
+
+/*
  * Twitter
  */
 function getTweets() {
@@ -36,12 +63,20 @@ var CACHE_TIME = 30;
 var MARKERS = {
   locations: [
     {
-      lat: '52.245671',
-      lon: '-7.080002'
+      lat: '48.74',
+      lon: '2.30'
     },
     {
-      lat: '52.257861',
-      lon: '-7.136993'
+      lat: '48.9',
+      lon: '2.30'
+    },
+    {
+      lat: '48.6',
+      lon: '2.20'
+    },
+    {
+      lat: '48.5',
+      lon: '2.25'
     }
   ]
 };
