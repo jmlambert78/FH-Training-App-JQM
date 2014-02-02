@@ -42,13 +42,14 @@ var mapController = {
 	getLocation : function() {
 		// Instance of the google map
 		var map = this.map;
-		var pos = {},pos2 = {"lat":48.74,"lon":2.30};
+		var pos = {},pos2 = {};
 		var that = this;
 		$fh.geo({
 			interval : 0
 		}, function(res) {
 			pos = new google.maps.LatLng(res.lat, res.lon);
 			map.setCenter(pos);
+         
 
 			// Create a marker at the current location
 			that.markers.push(new google.maps.Marker({
@@ -57,6 +58,7 @@ var mapController = {
 				icon : 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0|00FF00|000000'
 			}));
             // Create a 2nd marker at the current location
+            pos2 = new google.maps.LatLng(48.74, 2.30);
 			that.markers.push(new google.maps.Marker({
 				position : pos2,
 				map : map,
