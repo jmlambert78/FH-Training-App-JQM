@@ -69,7 +69,7 @@ var mapController = {
                     }));
                 }
 
-            })            
+            });            
             
             // Create a 2nd marker at the current location
             pos2 = new google.maps.LatLng(48.74, 2.30);
