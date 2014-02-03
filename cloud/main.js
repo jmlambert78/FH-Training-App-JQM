@@ -18,7 +18,8 @@ exports.mongodbPoints = function(params, cb){
     var collection = db.collection("poi");
     collection.find(params[0], params[1],function(err, docs) {
       db.close();
-      console.log("in mongocall",docs.length);
+    $fh.log({"msg":,"in mongocall"+docs.length});  
+    //console.log("in mongocall",docs.length);
       return cb(null, docs);
     });
   });
@@ -120,7 +121,7 @@ function getPoints() {
   var params = ["{}","{lat:1,lon:1,_id:0}"];
   
   mongodbPoints(params, function(err, poi){
-  console.log("after mongocall",poi.length);
+  $fh.log({"msg":,"after mongocall"+poi.length});
   
   });
   if (cache.length === 0) {
