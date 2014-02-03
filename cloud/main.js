@@ -119,7 +119,7 @@ function getPoints() {
   var poi = [];
   var params = ["{}","{lat:1,lon:1,_id:0}"];
   
-  mongodbPoints(param, function(var err,poi){
+  mongodbPoints(params, function(var err, poi){
   console.log("after mongocall",poi.length);
   
   });
