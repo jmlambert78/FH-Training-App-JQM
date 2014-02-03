@@ -120,35 +120,14 @@ function getPoints() {
   var poi = [],err;
   var params = ["{}","{lat:1,lon:1,_id:0}"];
   $fh.log({"message":"in getpoints"});
+  
   mongodbPoints(params, function(err, poi){
-  //$fh.log({"msgout":,poi.length});
   data=poi;
-  cache=null;
   });
-  if (cache.length === 0) {
-    var data = MARKERS;
-    var hash = $fh.hash({
-      algorithm: 'MD5',
-      text: $fh.stringify(data)
-    });
-
-    // Cache the data
-    cachePoints(hash, data);
-
+  
     // Build the response
-    response = {'data': data, 'hash':hash, 'cached':false};
-  } else {
-    // Parse the cached data
-    cache = $fh.parse(cache);
-
-    if( $params.hash && $params.hash === cache.hash ) {
-      // Client data is up to date
-      response = {'hash':$params.hash, 'cached':true};
-    } else {
-      // Hash value from client missing or incorrect, return cached cloud data
-      response = cache;
-    }
-  }
+  response = {'data': data,'cached':false};
+   
   return response;
 }
 
