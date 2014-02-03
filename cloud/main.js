@@ -116,10 +116,10 @@ function cachePoints(hash, data) {
 function getPoints() {
   var response = {};
   var cache    = getCachedPoints();
-  var poi = [];
+  var poi = [],err;
   var params = ["{}","{lat:1,lon:1,_id:0}"];
   
-  mongodbPoints(params, function(var err, poi){
+  mongodbPoints(params, function(err, poi){
   console.log("after mongocall",poi.length);
   
   });
