@@ -13,6 +13,6 @@ var mapModel = {
 					callback(this.data);
 				}
 			});
-		});
+
 	}
 }
