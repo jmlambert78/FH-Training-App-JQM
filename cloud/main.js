@@ -18,7 +18,7 @@ exports.mongodbPoints = function(params, cb){
     var collection = db.collection("poi");
     collection.find({}).toArray(function(err, docs) {
       db.close();
-    $fh.log({"message":docs.length});  
+    //$fh.log({"message":docs.length});  
     //console.log("in mongocall",docs.length);
       return cb(null, docs);
     });
