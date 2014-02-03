@@ -3,7 +3,7 @@
  @param params.insert an object to insert into your database
  @param params.collection the collection to insert it into
  */
-exports.mongodb = function(params, cb){
+exports.mongodbPoints = function(params, cb){
   var MongoClient = require('mongodb').MongoClient,
           format = require('util').format,
           user = process.env.MONGODB_USER,
@@ -15,9 +15,10 @@ exports.mongodb = function(params, cb){
   MongoClient.connect('mongodb://' + upString + '@' + host + '/' + database, function(err, db) {
     if(err) return cb(err);
 
-    var collection = db.collection("test");
-    collection.findOne({}, function(err, docs) {
+    var collection = db.collection("poi");
+    collection.find(params[0], params[1],function(err, docs) {
       db.close();
+      console.log("in mongocall",docs.length);
       return cb(null, docs);
     });
   });
@@ -102,11 +103,26 @@ function cachePoints(hash, data) {
     "expire": CACHE_TIME
   });
 }
+// db content : db.poi.insert({
+//    _id:1,
+//    lon:48.4935,
+//    lat:2.645,
+//    desc:"POI# 1",
+//    nfc:true,
+//    detail:"POI# 1 details"});
+
+
 
 function getPoints() {
   var response = {};
   var cache    = getCachedPoints();
-
+  var poi = [];
+  var params = ["{}","{lat:1,lon:1,_id:0}"];
+  
+  mongodbPoints(param, function(var err,poi){
+  console.log("after mongocall",poi.length);
+  
+  });
   if (cache.length === 0) {
     var data = MARKERS;
     var hash = $fh.hash({
