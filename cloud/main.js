@@ -119,7 +119,7 @@ function getPoints() {
   var cache    = getCachedPoints();
   var poi = [],err;
   var params = ["{}","{lat:1,lon:1,_id:0}"];
-  
+  $fh.log({"message":"in getpoints"});
   mongodbPoints(params, function(err, poi){
   //$fh.log({"msgout":,poi.length});
   data=poi;
