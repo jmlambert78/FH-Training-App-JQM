@@ -64,6 +64,7 @@ var mapController = {
                     that.markers.push(new google.maps.Marker({
                         position : pos,
                         map : map,
+						title: point.detail,
                         icon : 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + '0|FF0000|000000'
                     }));
                 }
