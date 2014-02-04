@@ -20,10 +20,11 @@ exports.mongodbPoints = function(params, cb){
       db.close();
     //$fh.log({"message":docs.length});  
     //console.log("in mongocall",docs.length);
+	var response={data:{locations:docs}};
       if(err) 
         return cb(err)
       else
-        return cb(null, docs);
+        return cb(null, response);
     });
   });
 
