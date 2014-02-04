@@ -3,16 +3,19 @@ var mapModel = {
 	//load local points first and compare hash value with cloud retrieved data. update if cloud version has updated.
 	loadPoints : function(callback) {
 		$fh.act({
-				act : 'getPoints',
+				act : 'mongodbPoints',
 				req : {
 					timestamp : new Date().getTime()
 				}
 			}, function(res) {
-				this.data = res;
 				if(callback) {
-					callback(this.data);
+					callback(res);
 				}
-			});
+			},
+            function(msg, err) {
+                // An error occured during the cloud call. Alert some debugging information
+                alert('Cloud call failed with error:' + msg + '. Error properties:' + JSON.stringify(err));
+                });
 
 	}
 }
