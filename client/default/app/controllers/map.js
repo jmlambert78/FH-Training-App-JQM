@@ -50,34 +50,12 @@ var mapController = {
 			pos = new google.maps.LatLng(res.lat, res.lon);
 			map.setCenter(pos);
          
-
 			// Create a marker at the current location
 			that.markers.push(new google.maps.Marker({
 				position : pos,
 				map : map,
 				icon : 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0|00FF00|000000'
 			}));
-            mapModel.loadPoints(function(res) {
-                for(var i = 0; i < res.data.locations.length; i++) {
-                    var point = res.data.locations[i];
-                    var pos = new google.maps.LatLng(point.lat, point.lon);
-                    that.markers.push(new google.maps.Marker({
-                        position : pos,
-                        map : map,
-						title: point.detail,
-                        icon : 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (0+i) +'|FF0000|000000'
-                    }));
-                }
-
-            });            
-            
-            // Create a 2nd marker at the current location
-            //pos2 = new google.maps.LatLng(48.74, 2.30);
-			//that.markers.push(new google.maps.Marker({
-			//	position : pos2,
-			//	map : map,
-			//	icon : 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0|FF0000|000000'
-			//}));
 
 		}, function() {
 			// We failed to get the users geolocation, fallback to geo ip
