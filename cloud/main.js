@@ -28,9 +28,21 @@ exports.mongodbPoints = function(params, cb){
 			  else
 				return cb(null, response);
 			});
-		});
-
-	}});
+			});
+		}
+		else {
+			var collection = db.collection("poi");
+			collection.find({}).toArray(function(err, docs) {
+			  db.close();
+			//$fh.log({"message":docs.length});  
+			//console.log("in mongocall",docs.length);
+			var response={data:{locations:docs}};
+			  if(err) 
+				return cb(err)
+			  else
+				return cb(null, response);
+			});
+		}});
 };
 /*
  * Twitter
