@@ -12,25 +12,26 @@ exports.mongodbPoints = function(params, cb){
           database = process.env.MONGODB_DATABASE,
           host = process.env.MONGODB_HOST;
 
-  MongoClient.connect('mongodb://' + upString + '@' + host + '/' + database, function(err, db) {
-    if(err) return cb(err);
+	MongoClient.connect('mongodb://localhost/jml_fh', function(err, db) {// Test if local db present else try remote
+		if(err) {
+			MongoClient.connect('mongodb://' + upString + '@' + host + '/' + database, function(err, db) {
+				if(err) return cb(err);
 
-    var collection = db.collection("poi");
-    collection.find({}).toArray(function(err, docs) {
-      db.close();
-    //$fh.log({"message":docs.length});  
-    //console.log("in mongocall",docs.length);
-	var response={data:{locations:docs}};
-      if(err) 
-        return cb(err)
-      else
-        return cb(null, response);
-    });
-  });
+			var collection = db.collection("poi");
+			collection.find({}).toArray(function(err, docs) {
+			  db.close();
+			//$fh.log({"message":docs.length});  
+			//console.log("in mongocall",docs.length);
+			var response={data:{locations:docs}};
+			  if(err) 
+				return cb(err)
+			  else
+				return cb(null, response);
+			});
+		});
 
+	}});
 };
-
-
 /*
  * Twitter
  */
