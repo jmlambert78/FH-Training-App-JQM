@@ -60,7 +60,7 @@ var mapController = {
             mapModel.loadPoints(function(res) {
                 for(var i = 0; i < res.data.locations.length; i++) {
                     var point = res.data.locations[i];
-                    var pos = new google.maps.LatLng(point.lon, point.lat);//WARNING: fix the db and invert lat/lon...
+                    var pos = new google.maps.LatLng(point.lat, point.lon);
                     that.markers.push(new google.maps.Marker({
                         position : pos,
                         map : map,
